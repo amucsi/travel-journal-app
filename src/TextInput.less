@@ -1,0 +1,31 @@
+.TextInput {
+    position: relative; // Az absolute gyerek miatt kell csak
+
+    input {
+        padding: 12px; // Kell a hely a placeholdernek
+        border-radius: 15px; // Lekerekített
+    }
+
+    label {
+        position: absolute; // Függetlenítjük a layout logikától
+        color: gray; // Alig látszik, ez jó lehet sötét és világos témákra is
+        font-style: italic; // Dőlt betű
+        left: 12px; // Kezdeti pozíció a bal felső sarorból
+        top: 12px; // Kezdeti pozíció a bal felső sarorból
+        pointer-events: none; // Csak dekoráció, ne kapja el az egér eseményeket
+        transition: all 145ms ease-out; // Átmenet animáció
+        overflow: hidden; // Ha kilóg (mert például hosszú a placeholder szöveg), akkor se lógjon ki
+        white-space: nowrap; // Ne tördelje több sorba, akkor se, ha hosszú
+        max-width: calc(100% - 24px); // Maximum mérete pont az input mérete, de 12px balról és 12px     jobbról le van vonva
+    }
+
+    label.subsided,
+    input:focus+label {
+        // Ha az inputon van a fókusz, vagy be van írva valami
+        line-height: 1; // Sormagasság minimális, hogy ne maradjon felesleges pixel felette, amikor a     sarokba megy
+        left: 6px; // Sarok, de 2px kell, hogy ne érjen hozzá a széléhez
+        top: 6px; // Sarok
+        font-size: 0px; // Összemegy picire
+        color: #666; // Elhalványul sötét téma esetén. Ez világos témánál kb. #aaa kéne legyen.
+    }
+}
