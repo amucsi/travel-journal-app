@@ -22,7 +22,7 @@ export function LoginAuthForm() {
         <TextInput type="email" placeholder="Email" value={email} onChange={setEmail} />
         <TextInput type="password" placeholder="Password" value={password} onChange={setPassword} />
         <IconButton name={register ? "person_add" : "login"} text={register ? "Register" : "Login"} onClick={registerAccount} />
-        <p>
+        <p class="link"> {register ? "Already have an account? " : "Don't have an account? "}
             <a href="" onClick={e => {
                 e.preventDefault();
                 setRegister(!register)

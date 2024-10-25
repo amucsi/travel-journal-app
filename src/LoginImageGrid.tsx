@@ -4,19 +4,19 @@ export function LoginImageGrid() {
     return <div class="LoginImageGrid">
         <div class="image-item">
             <img src="https://via.placeholder.com/150" alt="Image 1" />
-            <label>Image 1</label>
+            <label>Write journal entries!</label>
         </div>
         <div class="image-item">
-            <img src="https://via.placeholder.com/150" alt="Image 2" />
-            <label>Image 2</label>
+            <img src="src/assets/waterfall_gif.gif" alt="Waterfall" />
+            <label>Attach your videos!</label>
         </div>
         <div class="image-item">
             <img src="https://via.placeholder.com/150" alt="Image 3" />
-            <label>Image 3</label>
+            <label>Attach locations!</label>
         </div>
         <div class="image-item">
             <img src="https://via.placeholder.com/150" alt="Image 4" />
-            <label>Image 4</label>
+            <label>Share your journeys!</label>
         </div>
     </div>
 }
