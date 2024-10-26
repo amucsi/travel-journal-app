@@ -6,13 +6,13 @@ import { Main } from './Main';
 import { Login } from './Login';
 
 export function App() {
-	let [loggedIn, setLoggedIn] = useState(false);
+	let [loggedIn, setLoggedIn] = useState(!!sessionStorage.getItem('loggedInUser'));
 
-	function logInCheck() {
-		//
+	function logInCheck(isLoggedIn: boolean) {
+		setLoggedIn(isLoggedIn);
 	}
 
-	return loggedIn ? <Main /> : <Login />
+	return loggedIn ? <Main /> : <Login logInCheck={logInCheck}/>
 }
 
 render(<App />, document.getElementById('app'));

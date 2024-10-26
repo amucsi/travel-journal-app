@@ -19,13 +19,7 @@
         max-width: calc(100% - 24px); // Maximum mérete pont az input mérete, de 12px balról és 12px     jobbról le van vonva
     }
 
-    label.subsided,
-    input:focus+label {
-        // Ha az inputon van a fókusz, vagy be van írva valami
-        line-height: 1; // Sormagasság minimális, hogy ne maradjon felesleges pixel felette, amikor a     sarokba megy
-        left: 6px; // Sarok, de 2px kell, hogy ne érjen hozzá a széléhez
-        top: 6px; // Sarok
-        font-size: 0px; // Összemegy picire
-        color: #666; // Elhalványul sötét téma esetén. Ez világos témánál kb. #aaa kéne legyen.
+    label.subsided { //ha be van irva valami
+        font-size: 0px;
     }
 }
