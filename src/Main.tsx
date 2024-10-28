@@ -4,28 +4,43 @@ import { EntryList } from "./EntryList";
 import "./Main.less"
 import { TopBar } from "./TopBar";
 import { AddEntryButton } from "./AddEntryButton";
+import { Entry } from "./Entry";
+import { EntryEditor } from "./EntryEditor";
 
 export function Main() {
     let [entries, setEntries] = useState([]);
+    let [selectedEntry, setSelectedEntry] = useState(null);
+    let [isAddingEntry, setIsAddingEntry] = useState(false);
     let loggedInUser = sessionStorage.getItem("loggedInUser");
 
     useEffect(() => {
-        const allEntries = JSON.parse(localStorage.getItem("entries") || "[]");
+        let allEntries = JSON.parse(localStorage.getItem("entries") || "[]");
         setEntries(allEntries.filter(entry => entry.username === loggedInUser));
     }, [loggedInUser]);
 
     function addEntry(newEntry) {
-        const updatedEntries = [...entries, newEntry];
+        let updatedEntries = [...entries, newEntry];
         setEntries(updatedEntries);
         localStorage.setItem("entries", JSON.stringify([...JSON.parse(localStorage.getItem("entries") || "[]"), newEntry]));
+        setIsAddingEntry(false);
+    }
+
+    function deleteEntry(id) {
+        let updatedEntries = entries.filter(entry => entry.id !== id);
+        setEntries(updatedEntries);
+        localStorage.setItem("entries", JSON.stringify(updatedEntries));
     }
 
     return <div class="Main">
-        <TopBar username="Faszi" />
+        <TopBar username={loggedInUser} />
+        {/* <AddEntryButton onAddEntry={addEntry} /> */}
+        {!isAddingEntry && <AddEntryButton onAddEntry={() => setIsAddingEntry(true)} />}
         <div class="contentWrapper">
-            <EntryList entries={entries} />
-            <AddEntryButton onAddEntry={addEntry} />
+            {selectedEntry ? <Entry entry={selectedEntry} onClose={()=> setSelectedEntry(null)}/>
+                            :
+                            <EntryList entries={entries} onPreviewClick={setSelectedEntry} onDelete={deleteEntry}/>}
         </div>
+        {isAddingEntry && <EntryEditor onSave={addEntry} onCancel={() => setIsAddingEntry(false)} />}
         <BottomBar />
     </div>
 }
