@@ -9,6 +9,7 @@ export function EntryEditor({ onSave, onCancel }) {
     const [title, setTitle] = useState("");
     const [content, setContent] = useState("");
     const [location, setLocation] = useState<{ lat: number; lng: number } | null>(null);
+    const [date, setDate] = useState(() => new Date().toISOString().split("T")[0]);
 
     // Automatically ask for user location
     function handleAutoLocation() {
@@ -34,6 +35,7 @@ export function EntryEditor({ onSave, onCancel }) {
             title,
             content,
             location,
+            date,
             username: sessionStorage.getItem("loggedInUser"),
         };
         onSave(newEntry);
@@ -55,7 +57,7 @@ export function EntryEditor({ onSave, onCancel }) {
 
     return (
         <div class="EntryEditor">
-            <h2>Write New Entry</h2>
+            <span class="span1">Write New Entry</span>
             <input
                 type="text"
                 placeholder="Title"
@@ -67,7 +69,13 @@ export function EntryEditor({ onSave, onCancel }) {
                 value={content}
                 onChange={(e) => setContent((e.target as HTMLTextAreaElement).value)}
             />
-            <h3>Add a location</h3>
+            <span class="span2">Select Date</span>
+            <input
+                type="date"
+                value={date}
+                onChange={(e) => setDate((e.target as HTMLInputElement).value)}
+            />
+            <span class="span2">Add a Location</span>
             <div class="buttons">
                 <IconButton name="location_on" text="Use My Location" onClick={handleAutoLocation} />
                 <IconButton name="map" text="Pick on Map" onClick={() => setLocation({ lat: 51.505, lng: -0.09 })} />

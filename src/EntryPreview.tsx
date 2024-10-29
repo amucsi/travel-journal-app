@@ -12,6 +12,7 @@ export function EntryPreview({ entry, onClick, onDelete }) {
     }
 
     return <div class="EntryPreview">
+        <span class="date">{entry.date}</span>
         <h3>{entry.title}</h3>
         <button type="button" onClick={handleDeleteClick}>
             <span class="material-symbols-outlined">
@@ -19,6 +20,6 @@ export function EntryPreview({ entry, onClick, onDelete }) {
             </span>
         </button>
         <p class="previewText">{previewContent}</p>
-        <IconButton name="expand_content" text="" onClick={onClick}/>
+        <IconButton name="expand_content" text="" onClick={onClick} />
     </div>
 }
