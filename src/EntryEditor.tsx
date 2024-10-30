@@ -82,7 +82,7 @@ export function EntryEditor({ onSave, onCancel }) {
             </div>
             {location && (
                 <div class="mapContainer">
-                    <MapContainer center={location as LatLngExpression} zoom={13} style={{ height: "300px", width: "100%" }}>
+                    <MapContainer center={location as LatLngExpression} zoom={13}  style={{ height: "300px", width: "100%" }}>
                         <TileLayer
                             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                             attribution='&copy; <a href="https://osm.org/copyright">OpenStreetMap</a> contributors'
