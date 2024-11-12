@@ -7,9 +7,9 @@ export function TopBar({ username }: { username: string }) {
         window.location.reload();
     }
 
-    return <div class="TopBar">
+    return <header class="TopBar">
         <span>Welcome, {username}!</span>
         <span>{new Date().toLocaleDateString()}</span>
         <IconButton name="logout" text="Logout" onClick={logout} />
-    </div>
+    </header>
 }

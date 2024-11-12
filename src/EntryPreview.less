@@ -34,10 +34,36 @@
         }
     }
 
-    .date {
+    .header {
         position: absolute;
         top: 15px;
         left: 10px;
+    }
+
+    .tinyMapContainer {
+        height: 100px;
+        width: 90%;
+        border-radius: 10px;
+        overflow: hidden;
+    }
+
+    .mediaPreview {
+        margin-top: 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .mediaThumbnail {
+        max-width: 100%;
+        max-height: 150px;
+        border-radius: 8px;
+        object-fit: cover;
+    }
+
+    .noMediaMessage {
+        font-style: italic;
+        color: #888;
     }
 }
 
