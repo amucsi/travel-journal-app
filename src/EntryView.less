@@ -1,4 +1,4 @@
-.Entry {
+.EntryView {
     position: absolute;
     top: 50px;
     bottom: 50px;
@@ -7,20 +7,58 @@
     padding: 20px;
     overflow-y: auto;
     background-color: #272727;
-    /* Set a background color */
-    z-index: 999; //az addentry gomb es entrylist felett legyen
+    z-index: 1000; //az addentry gomb es entrylist felett legyen
+
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    box-sizing: border-box;
+    max-width: 100%;
 
     h1 {
         margin-top: 0;
+        font-size: 2rem;
+        font-weight: bold;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+        word-break: break-word;
+        margin-bottom: 0;
+        max-width: 90%;
     }
 
     .IconButton {
         position: absolute;
         top: 10px;
         right: 10px;
+        margin-top: 10px;
         font-size: 18px;
-        background: transparent;
-        border: none;
         cursor: pointer;
+    }
+
+    p {
+        font-size: 1.1rem;
+        line-height: 1.6;
+        margin: 0;
+    }
+
+    .date {
+        font-size: 0.9rem;
+        color: #868e96;
+        margin-top: -10px;
+    }
+
+    .media-container {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .media-container img,
+    .media-container video {
+        max-width: 100%;
+        max-height: 50vh;
+        object-fit: cover;
+        border-radius: 8px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
     }
 }

@@ -3,7 +3,7 @@ import "./LoginAuthForm.less"
 import { TextInput } from "./TextInput"
 import { IconButton } from "./IconButton"
 
-export function LoginAuthForm({logInCheck} : {logInCheck: (b: boolean)=>void}) {
+export function LoginAuthForm({ logInCheck }: { logInCheck: (b: boolean) => void }) {
     let [email, setEmail] = useState("")
     let [password, setPassword] = useState("")
     let [username, setUsername] = useState("")
@@ -11,14 +11,14 @@ export function LoginAuthForm({logInCheck} : {logInCheck: (b: boolean)=>void}) {
 
     let usernameRef = useRef<HTMLInputElement>(null);
 
-    useEffect(()=> {
+    useEffect(() => {
         if (usernameRef.current) {
             usernameRef.current.focus();
         }
     }, [register]);
 
     function registerAccount() {
-        let users: {[username: string] : {email: string; password: string}} = JSON.parse(localStorage.getItem('users') || '{}');
+        let users: { [username: string]: { email: string; password: string } } = JSON.parse(localStorage.getItem('users') || '{}');
 
         if (register) { //registering
             if (username && email && password) {
@@ -30,7 +30,7 @@ export function LoginAuthForm({logInCheck} : {logInCheck: (b: boolean)=>void}) {
                     alert("Email already exists!");
                 }
                 else {
-                    users[username] = {email, password};
+                    users[username] = { email, password };
                     localStorage.setItem('users', JSON.stringify(users));
                     alert("Successful registration!"); //TODO valami jobb kene
                     setRegister(false);
@@ -59,9 +59,9 @@ export function LoginAuthForm({logInCheck} : {logInCheck: (b: boolean)=>void}) {
 
     return <div class="LoginAuthForm">
         <span class="logoText">Travel Journal</span>
-        <TextInput type="text" placeholder="Username" value={username} onChange={setUsername} ref={usernameRef}/>
-        {register && <TextInput type="email" placeholder="Email" value={email} onChange={setEmail}/>}
-        <TextInput type="password" placeholder="Password" value={password} onChange={setPassword} onEnter={registerAccount}/>
+        <TextInput type="text" placeholder="Username" value={username} onChange={setUsername} ref={usernameRef} />
+        {register && <TextInput type="email" placeholder="Email" value={email} onChange={setEmail} />}
+        <TextInput type="password" placeholder="Password" value={password} onChange={setPassword} onEnter={registerAccount} />
         <IconButton name={register ? "person_add" : "login"} text={register ? "Register" : "Login"} onClick={registerAccount} />
         <p class="link"> {register ? "Already have an account? " : "Don't have an account? "}
             <a href="" onClick={e => {

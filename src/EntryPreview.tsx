@@ -11,7 +11,7 @@ export type EntryPreviewProps = {
 }
 
 export function EntryPreview({ entry, onExpand, onDelete }: EntryPreviewProps) {
-    const previewContent = entry.content.split(" ").slice(0, 20).join(" ") + "...";
+    const previewContent = entry.content ? entry.content.split(" ").slice(0, 20).join(" ") + "..." : "";
 
     function handleDeleteClick(e) {
         e.stopPropagation();
@@ -22,34 +22,39 @@ export function EntryPreview({ entry, onExpand, onDelete }: EntryPreviewProps) {
 
     return <div class="EntryPreview">
         <span class="header">{entry.date}</span>
-        <h3>{entry.title}</h3>
         <button type="button" onClick={handleDeleteClick}>
             <span class="material-symbols-outlined">
                 delete
             </span>
         </button>
-        <p class="previewText">{previewContent}</p>
+        <div class="top">
+            <h3>{entry.title ? entry.title : "Untitled entry"}</h3>
+            <div class="previewText">
+                <p>{previewContent}</p>
+            </div>
+        </div>
+        <div class="bottom">
+            <div class="mediaPreview">
+                {entry.images && entry.images.length > 0 ? (
+                    <img src={entry.images[0]} alt="Entry Media" class="mediaThumbnail" />
+                ) : entry.videos && entry.videos.length > 0 ? (
+                    <video src={entry.videos[0]} controls class="mediaThumbnail" />
+                ) : (undefined
+                    //<p class="noMediaMessage">No media attached</p>
+                )}
+            </div>
 
-        <div className="mediaPreview">
-            {entry.images && entry.images.length > 0 ? (
-                <img src={entry.images[0]} alt="Entry Media" className="mediaThumbnail" />
-            ) : entry.videos && entry.videos.length > 0 ? (
-                <video src={entry.videos[0]} controls className="mediaThumbnail" />
-            ) : (
-                <p className="noMediaMessage">No media attached</p>
+            {entry.location && (
+                <div class="tinyMapContainer">
+                    <MapContainer center={entry.location as LatLngExpression} zoom={7}>
+                        <TileLayer
+                            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                        />
+                        <Marker position={entry.location as LatLngExpression} />
+                    </MapContainer>
+                </div>
             )}
         </div>
-
-        {entry.location && (
-            <div className="tinyMapContainer">
-                <MapContainer center={entry.location as LatLngExpression} zoom={13}>
-                    <TileLayer
-                        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                    />
-                    <Marker position={entry.location as LatLngExpression} />
-                </MapContainer>
-            </div>
-        )}
         <IconButton name="expand_content" text="" onClick={onExpand} />
     </div>
 }
