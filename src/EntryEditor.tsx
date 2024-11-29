@@ -6,8 +6,27 @@ import "./EntryEditor.less";
 import { IconButton } from "./IconButton";
 import { EntryData } from "./EntryData";
 import { JSX } from "preact";
+import { LeafletMapContainer } from "./LeafletMapContainer";
 
-export function EntryEditor({ onSave, onCancel }) {
+/**
+ * Props for EntryEditor
+ * onSave saves the entry, onCancel exits the editor
+ */
+export type EntryEditorProps = {
+    onSave: (entry: EntryData) => void;
+    onCancel: () => void;
+}
+
+/**
+ * The editor form responsible for creating and saving a new entry
+ * Includes inputs for title and content, a date picker, a location picker map using react-leaflet,
+ * and two media file upload inputs
+ *
+ * @export
+ * @param {EntryEditorProps} {onSave, onCancel}
+ * @return TSX entry editor form element
+ */
+export function EntryEditor({ onSave, onCancel }: EntryEditorProps): any {
     const [title, setTitle] = useState("");
     const [content, setContent] = useState("");
     const [location, setLocation] = useState<{ lat: number; lng: number } | null>(null);
@@ -15,7 +34,10 @@ export function EntryEditor({ onSave, onCancel }) {
     const [images, setImages] = useState<string[]>([]);
     const [videos, setVideos] = useState<string[]>([]);
 
-    //auto ask for user location
+    /**
+     * The method responsible for asking the user their location
+     *
+     */
     function handleAutoLocation() {
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(
@@ -32,7 +54,12 @@ export function EntryEditor({ onSave, onCancel }) {
         }
     }
 
-    // Helper function to convert file to base64
+    /**
+     * Function to convert files into Base64 strings
+     *
+     * @param {File} file
+     * @param {(base64: string) => void} callback
+     */
     function convertFileToBase64(file: File, callback: (base64: string) => void) {
         const reader = new FileReader();
         reader.onloadend = () => {
@@ -41,7 +68,12 @@ export function EntryEditor({ onSave, onCancel }) {
         reader.readAsDataURL(file);
     }
 
-    // Handle image upload
+    /**
+     * The method responsible for converting images into Base64
+     * We iterate over the the parameter's files and convert them
+     *
+     * @param {JSX.TargetedEvent<HTMLInputElement, Event>} event
+     */
     function handleImageUpload(event: JSX.TargetedEvent<HTMLInputElement, Event>) {
         const files = event.currentTarget.files;
         if (files) {
@@ -53,7 +85,12 @@ export function EntryEditor({ onSave, onCancel }) {
         }
     }
 
-    // Handle video upload
+    /**
+     * The method responsible for converting videos into Base64
+     * We iterate over the the parameter's files and convert them
+     *
+     * @param {JSX.TargetedEvent<HTMLInputElement, Event>} event
+     */
     function handleVideoUpload(event: JSX.TargetedEvent<HTMLInputElement, Event>) {
         const files = event.currentTarget.files;
         if (files) {
@@ -65,7 +102,12 @@ export function EntryEditor({ onSave, onCancel }) {
         }
     }
 
-    // Save entry
+
+    /**
+     * The method responsible for saving the new entry
+     * Creates an entry object, calls the onSave function and resets the inputs
+     *
+     */
     function handleSave() {
         const newEntry: EntryData = {
             id: new Date(),
@@ -85,7 +127,12 @@ export function EntryEditor({ onSave, onCancel }) {
         setVideos([]);
     }
 
-    // Map click event for manually choosing a location
+    /**
+     * The method responsible for handling the map click event
+     * Returns the location the user manually chose on the map
+     *
+     * @return location
+     */
     function LocationMarker() {
         useMapEvents({
             click(e) {
@@ -93,7 +140,17 @@ export function EntryEditor({ onSave, onCancel }) {
             },
         });
 
-        return location ? <Marker position={location} /> : null;
+        // return location;
+        return location ? <Marker position={location as LatLngExpression} /> : null;
+    }
+
+    /**
+     *
+     *
+     * @param {*} latlng
+     */
+    function handleMapClick(latlng) {
+        setLocation(latlng);
     }
 
     return (
@@ -123,12 +180,18 @@ export function EntryEditor({ onSave, onCancel }) {
             </div>
             {location && (
                 <div class="mapContainer">
-                    <MapContainer center={location as LatLngExpression} zoom={13}>
+                    {/* <MapContainer center={location as LatLngExpression} zoom={13}>
                         <TileLayer
                             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                         />
                         <LocationMarker />
-                    </MapContainer>
+                    </MapContainer> */}
+                    <LeafletMapContainer
+                        center={location as LatLngExpression}
+                        zoom={7}
+                        marker={location as LatLngExpression}
+                        onMapClick={setLocation}
+                    />
                 </div>
             )}
             <span class="span2">Attach Media</span>

@@ -1,5 +1,11 @@
 import "./LoginImageGrid.less"
 
+/**
+ * THe LoginImageGrid element display the app's features in a grid
+ *
+ * @export
+ * @return TSX grid element with media
+ */
 export function LoginImageGrid() {
     return <div class="LoginImageGrid">
         <div class="image-item">

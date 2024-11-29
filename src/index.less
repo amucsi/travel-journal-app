@@ -1,13 +1,27 @@
 :root {
-    --dark_background: #1d1d1d;
+    --background-color: #1d1d1d;
+    --text-color: #ffffff;
+    --accent-color1: #272727;
+    --accent-color2: #333333;
+
+    --button-hover: #464646;
+}
+
+[data-theme='light'] {
+    --background-color: #ffffff;
+    --text-color: #000000;
+    --accent-color1: #dcdcdc;
+    --accent-color2: #c2c2c2;
+
+    --button-hover: #b4b4b4;
 }
 
 html {
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     font-size: 16px;
     line-height: 1.5;
-    background: var(--dark_background);
-    color: white;
+    background: var(--background-color);
+    color: var(--text-color);
 
 }
 

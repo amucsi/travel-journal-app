@@ -3,6 +3,16 @@ import "./LoginAuthForm.less"
 import { TextInput } from "./TextInput"
 import { IconButton } from "./IconButton"
 
+/**
+ * The LoginAuthform returns a login authentication form where the user can login/register
+ * It handles cases such as an already existing user, or leaving out required fields
+ * The login works by entering a username and password
+ * While registering, the user must also add their email address
+ *
+ * @export
+ * @param {{ logInCheck: (b: boolean) => void }} { logInCheck }
+ * @return {*}
+ */
 export function LoginAuthForm({ logInCheck }: { logInCheck: (b: boolean) => void }) {
     let [email, setEmail] = useState("")
     let [password, setPassword] = useState("")
@@ -11,7 +21,8 @@ export function LoginAuthForm({ logInCheck }: { logInCheck: (b: boolean) => void
 
     let usernameRef = useRef<HTMLInputElement>(null);
 
-    useEffect(() => {
+    
+    useEffect(() => { //when switching to registering the focus is placed on the username input
         if (usernameRef.current) {
             usernameRef.current.focus();
         }
@@ -20,38 +31,38 @@ export function LoginAuthForm({ logInCheck }: { logInCheck: (b: boolean) => void
     function registerAccount() {
         let users: { [username: string]: { email: string; password: string } } = JSON.parse(localStorage.getItem('users') || '{}');
 
-        if (register) { //registering
+        if (register) { //if registering
             if (username && email && password) {
                 let emailExists = Object.values(users).some(u => u.email === email);
-                if (users[username]) {
+                if (users[username]) { //username taken
                     alert("Username already exists!");
                 }
-                else if (emailExists) {
+                else if (emailExists) { //email taken
                     alert("Email already exists!");
                 }
-                else {
+                else { //successful registration
                     users[username] = { email, password };
                     localStorage.setItem('users', JSON.stringify(users));
-                    alert("Successful registration!"); //TODO valami jobb kene
+                    alert("Successful registration!");
                     setRegister(false);
                 }
             }
-            else {
-                alert("Fill in all the fields!"); //valami jobb?
+            else { //field(s) left empty
+                alert("Please fill in all the fields!");
             }
         }
-        else { //logging in
+        else { //if logging in
             if (username && password) {
                 if (users[username] && users[username].password == password) {
                     sessionStorage.setItem('loggedInUser', username);
-                    alert("Successful log in!"); //valami jobbbbb
+                    alert("Successful log in!");
                     logInCheck(true);
                 }
-                else { //helytelen infok
+                else { //incorrect inputs
                     alert("Incorrect username or password");
                 }
             }
-            else { //uresen hagyott mezo
+            else { //field(s) left empty
                 alert("Please fill in all the fields!");
             }
         }

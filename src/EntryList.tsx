@@ -8,6 +8,14 @@ export type EntryListProps = {
     onDelete: (id: Date) => void;
 }
 
+/**
+ * The scrollable list element containing the EntryPreview components
+ * Converts the array of entries into EntryPreviews
+ *
+ * @export
+ * @param {EntryListProps} { entries, onPreviewClick, onDelete }
+ * @return TSX EntryList element containing EntryPreviews
+ */
 export function EntryList({ entries, onPreviewClick, onDelete }: EntryListProps) {
     return <div class="EntryList">
         {entries.map((entry: EntryData) => (

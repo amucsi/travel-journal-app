@@ -1,7 +1,21 @@
+import { EntryData } from "./EntryData";
 import "./EntryView.less"
 import { IconButton } from "./IconButton"
 
-export function EntryView({ entry, onClose }) {
+export type EntryViewProps = {
+    entry: EntryData;
+    onClose: () => void;
+}
+
+/**
+ * The EntryView component is the fullscreen view of an entry
+ * It displays all content of an entry, including a button to return to the EntryList
+ *
+ * @export
+ * @param {EntryViewProps} { entry, onClose }
+ * @return TSX fullscreen view component of an entry
+ */
+export function EntryView({ entry, onClose }: EntryViewProps) {
     return <div class="EntryView">
         <IconButton name="close" text="Close" onClick={onClose} />
         <h1>{entry.title}</h1>
