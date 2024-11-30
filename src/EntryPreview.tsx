@@ -53,7 +53,7 @@ export function EntryPreview({ entry, onExpand, onDelete }: EntryPreviewProps) {
                 {entry.images && entry.images.length > 0 ? (
                     <img src={entry.images[0]} alt="Entry Media" class="mediaThumbnail" />
                 ) : entry.videos && entry.videos.length > 0 ? (
-                    <video src={entry.videos[0]} controls class="mediaThumbnail" />
+                    <video src={entry.videos[0]} controls autoplay class="mediaThumbnail" />
                 ) : (undefined
                     //<p class="noMediaMessage">No media attached</p>
                 )}
