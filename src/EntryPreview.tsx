@@ -1,10 +1,14 @@
-import { MapContainer, Marker, TileLayer } from "react-leaflet";
 import { EntryData } from "./EntryData";
 import "./EntryPreview.less"
 import { IconButton } from "./IconButton";
 import { LatLngExpression } from "leaflet";
 import { LeafletMapContainer } from "./LeafletMapContainer";
 
+/**
+ * Props for EntryPreview
+ * entry is the specific entry object, onExpand shows the full entry view
+ * onDelete deletes the entry
+ */
 export type EntryPreviewProps = {
     entry: EntryData;
     onExpand: () => void;

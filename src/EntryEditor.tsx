@@ -1,5 +1,5 @@
 import { useState } from "preact/hooks";
-import { MapContainer, TileLayer, Marker, useMapEvents } from "react-leaflet";
+import { Marker, useMapEvents } from "react-leaflet";
 import { LatLngExpression } from "leaflet";
 import "leaflet/dist/leaflet.css";
 import "./EntryEditor.less";
@@ -142,15 +142,6 @@ export function EntryEditor({ onSave, onCancel }: EntryEditorProps): any {
 
         // return location;
         return location ? <Marker position={location as LatLngExpression} /> : null;
-    }
-
-    /**
-     *
-     *
-     * @param {*} latlng
-     */
-    function handleMapClick(latlng) {
-        setLocation(latlng);
     }
 
     return (

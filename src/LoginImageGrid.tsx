@@ -9,11 +9,11 @@ import "./LoginImageGrid.less"
 export function LoginImageGrid() {
     return <div class="LoginImageGrid">
         <div class="image-item">
-            <img src="https://via.placeholder.com/150" alt="Image 4" />
+            <img src="src/assets/account.png" alt="Image 4" />
             <label>Create your account!</label>
         </div>
         <div class="image-item">
-            <img src="https://via.placeholder.com/150" alt="Image 1" />
+            <img src="src/assets/write.png" alt="Image 1" />
             <label>Write journal entries!</label>
         </div>
         <div class="image-item">
@@ -21,7 +21,7 @@ export function LoginImageGrid() {
             <label>Attach your videos!</label>
         </div>
         <div class="image-item">
-            <img src="https://via.placeholder.com/150" alt="Image 3" />
+            <img src="src/assets/location.png" alt="Image 3" />
             <label>Attach locations!</label>
         </div>
     </div>

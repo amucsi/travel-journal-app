@@ -1,6 +1,11 @@
 import { forwardRef } from "preact/compat";
 import "./TextInput.less"
 
+/**
+ * value is the value of the input, onChange the method that gets called when value changes
+ * type is the type of the text input, placeholder is a placeholder message, it may be null
+ * onEnter and autofocus are self-explanatory
+ */
 export type TextInputProps = {
     value: string;
     onChange: (value: string) => void;
@@ -26,7 +31,7 @@ export const TextInput = forwardRef<HTMLInputElement, TextInputProps>(function T
                 if (e.key === "Enter")
                     onEnter!();
             } : undefined}
-            ref={ref}/>
+            ref={ref} />
         <label class={value ? "subsided" : undefined}>
             {placeholder}
         </label>

@@ -2,6 +2,10 @@ import { EntryData } from "./EntryData";
 import "./EntryView.less"
 import { IconButton } from "./IconButton"
 
+/**
+ * Props for EntryView
+ * entry is the specific entry, onClose closes the 
+ */
 export type EntryViewProps = {
     entry: EntryData;
     onClose: () => void;

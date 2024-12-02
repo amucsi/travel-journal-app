@@ -1,16 +1,26 @@
 import { useEffect, useState } from "preact/hooks";
 import { IconButton } from "./IconButton";
 
+/**
+ * The ChangeThemeButton is an IconButton that changes the theme of the app
+ * It also contains the logic for changing the theme
+ *
+ * @export
+ * @return TSX button theme change element
+ */
 export function ChangeThemeButton() {
     const [isLightMode, setIsLightMode] = useState<boolean>(() => {
         const savedTheme = localStorage.getItem("theme");
         return savedTheme === "light";
     });
 
+    /**
+     * Updates isLightMode variable and sets the new value in localStorage
+     *
+     */
     function toggleTheme() {
-        const newTheme = !isLightMode ? "light" : "dark";
+        const newTheme = isLightMode ? "dark" : "light";
         setIsLightMode(!isLightMode);
-        document.documentElement.setAttribute("data-theme", newTheme);
         localStorage.setItem("theme", newTheme);
     }
 
@@ -19,6 +29,6 @@ export function ChangeThemeButton() {
     }, [isLightMode]);
 
     return <div>
-        <IconButton name="light_mode" text="Change theme" onClick={toggleTheme}/>
+        <IconButton name="light_mode" text="Change theme" onClick={toggleTheme} />
     </div>
 }

@@ -2,6 +2,12 @@ import { EntryData } from "./EntryData";
 import "./EntryList.less"
 import { EntryPreview } from "./EntryPreview"
 
+
+/**
+ * Props for EntryList
+ * entries are the users' entries, onPreviewClick display the full entry
+ * onDelete deletes the specific entry
+ */
 export type EntryListProps = {
     entries: EntryData[];
     onPreviewClick: (e: EntryData) => void;

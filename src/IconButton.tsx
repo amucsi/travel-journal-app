@@ -1,5 +1,10 @@
 import "./IconButton.less"
 
+/**
+ * Props for IconButton
+ * name is the material symbol icon name, text is the button text
+ * onClick is self-explanatory
+ */
 export type IconButtonProps = {
     name: string;
     text: string;
