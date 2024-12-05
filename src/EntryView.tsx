@@ -24,7 +24,7 @@ export type EntryViewProps = {
 export function EntryView({ entry, onClose }: EntryViewProps) {
     return <div class="EntryView">
         <IconButton name="close" text="Close" onClick={onClose} />
-        <h1>{entry.title}</h1>
+        <h1>{entry.title ? entry.title : "Untitled entry"}</h1>
         <p class="date">{entry.date}</p>
         <p>{entry.content}</p>
         {entry.images?.length === 0 && entry.videos?.length === 0 ? <p class="unavaliable">No media attached</p> : <h2>Media</h2>}
