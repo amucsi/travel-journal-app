@@ -144,6 +144,15 @@ export function EntryEditor({ onSave, onCancel }: EntryEditorProps): any {
         return location ? <Marker position={location as LatLngExpression} /> : null;
     }
 
+    /**
+     *
+     *
+     * @param {*} latlng
+     */
+    function handleMapClick(latlng) {
+        setLocation(latlng);
+    }
+
     return (
         <div class="EntryEditor">
             <span class="span1">Write New Entry</span>

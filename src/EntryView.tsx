@@ -1,10 +1,12 @@
+import { LatLngExpression } from "leaflet";
 import { EntryData } from "./EntryData";
 import "./EntryView.less"
 import { IconButton } from "./IconButton"
+import { LeafletMapContainer } from "./LeafletMapContainer";
 
 /**
  * Props for EntryView
- * entry is the specific entry, onClose closes the 
+ * entry is the specific entry, onClose closes the entry
  */
 export type EntryViewProps = {
     entry: EntryData;
@@ -25,7 +27,8 @@ export function EntryView({ entry, onClose }: EntryViewProps) {
         <h1>{entry.title}</h1>
         <p class="date">{entry.date}</p>
         <p>{entry.content}</p>
-        <div class="media-container">
+        {entry.images?.length === 0 && entry.videos?.length === 0 ? <p class="unavaliable">No media attached</p> : <h2>Media</h2>}
+        <div class="mediaContainer">
             {entry.images?.length > 0 &&
                 entry.images.map((image, index) => (
                     <img key={index} src={image} alt={`Image ${index + 1}`} />
@@ -34,9 +37,15 @@ export function EntryView({ entry, onClose }: EntryViewProps) {
                 entry.videos.map((video, index) => (
                     <video key={index} src={video} controls />
                 ))}
-            {entry.images?.length === 0 && entry.videos?.length === 0 && (
-                <p>No media attached</p>
-            )}
         </div>
+        {entry.location ? <h2>Location</h2> : <p class="unavaliable">No location attached</p>}
+        {entry.location &&
+            <div class="mapContainer">
+                <LeafletMapContainer
+                    center={entry.location as LatLngExpression}
+                    zoom={7}
+                    marker={entry.location as LatLngExpression}
+                />
+            </div>}
     </div>
 }
