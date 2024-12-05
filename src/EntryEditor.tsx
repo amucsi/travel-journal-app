@@ -102,7 +102,6 @@ export function EntryEditor({ onSave, onCancel }: EntryEditorProps): any {
         }
     }
 
-
     /**
      * The method responsible for saving the new entry
      * Creates an entry object, calls the onSave function and resets the inputs
@@ -127,82 +126,48 @@ export function EntryEditor({ onSave, onCancel }: EntryEditorProps): any {
         setVideos([]);
     }
 
-    /**
-     * The method responsible for handling the map click event
-     * Returns the location the user manually chose on the map
-     *
-     * @return location
-     */
-    function LocationMarker() {
-        useMapEvents({
-            click(e) {
-                setLocation(e.latlng);
-            },
-        });
-
-        // return location;
-        return location ? <Marker position={location as LatLngExpression} /> : null;
-    }
-
-    /**
-     *
-     *
-     * @param {*} latlng
-     */
-    function handleMapClick(latlng) {
-        setLocation(latlng);
-    }
-
-    return (
-        <div class="EntryEditor">
-            <span class="span1">Write New Entry</span>
-            <input
-                type="text"
-                placeholder="Title"
-                value={title}
-                onChange={(e) => setTitle((e.target as HTMLInputElement).value)}
-            />
-            <textarea
-                placeholder="Content"
-                value={content}
-                onChange={(e) => setContent((e.target as HTMLTextAreaElement).value)}
-            />
-            <span class="span2">Select Date</span>
-            <input
-                type="date"
-                value={date}
-                onChange={(e) => setDate((e.target as HTMLInputElement).value)}
-            />
-            <span class="span2">Add a Location</span>
-            <div class="buttons">
-                <IconButton name="location_on" text="Use My Location" onClick={handleAutoLocation} />
-                <IconButton name="map" text="Pick on Map" onClick={() => setLocation({ lat: 47.497, lng: 19.04 })} />
-            </div>
-            {location && (
-                <div class="mapContainer">
-                    {/* <MapContainer center={location as LatLngExpression} zoom={13}>
-                        <TileLayer
-                            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                        />
-                        <LocationMarker />
-                    </MapContainer> */}
-                    <LeafletMapContainer
-                        center={location as LatLngExpression}
-                        zoom={7}
-                        marker={location as LatLngExpression}
-                        onMapClick={setLocation}
-                    />
-                </div>
-            )}
-            <span class="span2">Attach Media</span>
-            <label for="imageUpload">Images:</label>
-            <input name="imageUpload" type="file" accept="image/*" multiple onChange={handleImageUpload} />
-            <label for="videoUpload">Videos:</label>
-            <input name="videoUpload" type="file" accept="video/*" multiple onChange={handleVideoUpload} />
-            <div class="buttons">
-                <IconButton name="check" text="Save Entry" onClick={handleSave} />
-                <IconButton name="close" text="Cancel" onClick={onCancel} />
-            </div>
+    return <div class="EntryEditor">
+        <span class="span1">Write New Entry</span>
+        <input
+            type="text"
+            placeholder="Title"
+            value={title}
+            onChange={(e) => setTitle((e.target as HTMLInputElement).value)}
+        />
+        <textarea
+            placeholder="Content"
+            value={content}
+            onChange={(e) => setContent((e.target as HTMLTextAreaElement).value)}
+        />
+        <span class="span2">Select Date</span>
+        <input
+            type="date"
+            value={date}
+            onChange={(e) => setDate((e.target as HTMLInputElement).value)}
+        />
+        <span class="span2">Add a Location</span>
+        <div class="buttons">
+            <IconButton name="location_on" text="Use My Location" onClick={handleAutoLocation} />
+            <IconButton name="map" text="Pick on Map" onClick={() => setLocation({ lat: 47.497, lng: 19.04 })} />
         </div>
-    );
+        {location && (
+            <div class="mapContainer">
+                <LeafletMapContainer
+                    center={location as LatLngExpression}
+                    zoom={7}
+                    marker={location as LatLngExpression}
+                    onMapClick={setLocation}
+                />
+            </div>
+        )}
+        <span class="span2">Attach Media</span>
+        <label for="imageUpload">Images:</label>
+        <input name="imageUpload" type="file" accept="image/*" multiple onChange={handleImageUpload} />
+        <label for="videoUpload">Videos:</label>
+        <input name="videoUpload" type="file" accept="video/*" multiple onChange={handleVideoUpload} />
+        <div class="buttons">
+            <IconButton name="check" text="Save Entry" onClick={handleSave} />
+            <IconButton name="close" text="Cancel" onClick={onCancel} />
+        </div>
+    </div>
 }

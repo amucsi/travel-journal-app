@@ -1,7 +1,7 @@
 import "./LoginImageGrid.less"
 
 /**
- * THe LoginImageGrid element display the app's features in a grid
+ * THe LoginImageGrid element displays the app's features in a grid
  *
  * @export
  * @return TSX grid element with media

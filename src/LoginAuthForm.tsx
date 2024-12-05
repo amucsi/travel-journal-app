@@ -21,7 +21,6 @@ export function LoginAuthForm({ logInCheck }: { logInCheck: (b: boolean) => void
 
     let usernameRef = useRef<HTMLInputElement>(null);
 
-    
     useEffect(() => { //when switching to registering the focus is placed on the username input
         if (usernameRef.current) {
             usernameRef.current.focus();
